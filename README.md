@@ -1,10 +1,10 @@
 # rNA
 
-[![GitHub issues](https://img.shields.io/github/issues/skchronicles/rNA)](https://github.com/skchronicles/rNA/issues)  [![GitHub license](https://img.shields.io/github/license/skchronicles/rNA)](https://github.com/skchronicles/rNA/blob/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/CCBR/rNA)](https://github.com/CCBR/rNA/issues)  [![GitHub license](https://img.shields.io/github/license/CCBR/rNA)](https://github.com/CCBR/rNA/blob/master/LICENSE)
 
 ### Table of Contents
 1. [Introduction](#1-Introduction)  
-2. [Overivew](#2-Overview)  
+2. [Overview](#2-Overview)  
     2.1 [Primary Analysis](#21-Primary-Analysis)  
     2.2 [Downstream Analysis](#22-Downstream-Analysis)   
 3. [Run rRNA](#3-Run-rNA)  
