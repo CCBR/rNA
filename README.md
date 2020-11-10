@@ -2,7 +2,9 @@
 
 [![GitHub issues](https://img.shields.io/github/issues/CCBR/rNA)](https://github.com/CCBR/rNA/issues)  [![GitHub license](https://img.shields.io/github/license/CCBR/rNA)](https://github.com/CCBR/rNA/blob/master/LICENSE)
 
-View a demo of an [interactive rNA report](http://ccbr.github.io/rNA/rNA.html) with The Cancer Genome Atlas Glioblastoma Multiforme (TCGA-GBM) RNA-seq data.  
+<img src="https://github.com/skchronicles/rNA/blob/master/data/rNA-demo.png">
+
+View a [demo of an interactive rNA report](http://ccbr.github.io/rNA/rNA.html) with The Cancer Genome Atlas Glioblastoma Multiforme (TCGA-GBM) RNA-seq data.  
 
 ### Table of Contents
 1. [Introduction](#1-Introduction)  
