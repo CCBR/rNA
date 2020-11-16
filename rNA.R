@@ -31,6 +31,11 @@ parser$add_argument("-o", "--output_dir", type="character", required=TRUE,
 parser$add_argument("-f", "--output_filename", type="character", required=FALSE, default = 'rNA.html',
                     help="Optional Output HTML Filename: Defaults to 'rNA.html'")
 
+# Display sample names 
+parser$add_argument("-a", "--annotate", action="store_true", default=FALSE,
+    help="Display sample names in complex heatmap: Defaults to FALSE")
+
+
 args <- parser$parse_args()
 
 # Get current working directory to setwd() of rmarkdown, else PATHs must be absolute
@@ -41,6 +46,7 @@ rmarkdown::render(args$rmarkdown, output_file=file.path(args$output_dir, args$ou
   raw = args$raw_counts,
   tin = args$tin_counts,
   qc = args$qc_table,
-  wdir = working_directory 
+  wdir = working_directory,
+  annot = args$annotate  
  )
 )
