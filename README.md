@@ -45,8 +45,9 @@ _voom_<sup>7</sup> is an acronym for mean-variance modelling at the observationa
 ##### 3.1 Usage  
 
 ```bash
-$ ./rNA.R [OPTIONS] -m RMARKDOWN -r RAW_COUNTS -t TIN_COUNTS -q QC_TABLE -o OUTPUT_DIR
+$ ./rNA.R [OPTIONS] -m RMARKDOWN -r RAW_COUNTS -t TIN_COUNTS -q QC_TABLE -o OUTPUT_DIR  
 ```
+
 ##### 3.2 Required Arguments  
 
 | Flag                  | Type       |   Description                   |
@@ -61,14 +62,30 @@ $ ./rNA.R [OPTIONS] -m RMARKDOWN -r RAW_COUNTS -t TIN_COUNTS -q QC_TABLE -o OUTP
 | Flag                  |   Description                       |
 | --------------------- | ----------------------------------  |
 | -h, --help            | Displays help and usage information |
-| -f, --output_filename | Output HTML filename, Default: rNA.html|
+| -f, --output_filename | Output HTML filename, Default: rNA.html |
+| -a,  --annotate       | Flag to display sample names in complex heatmap | 
 
-##### 3.4 Example
+##### 3.4 Examples
 ```bash
+# Basic Usage
 Rscript rNA.R -m src/rNA.Rmd \
               -r data/TCGA-GBM_Raw_RSEM_Genes.txt \
               -t data/TCGA-GBM_TINs.txt \
               -q data/multiqc_matrix.txt -o "$PWD"
+
+# Option(s): Custom Output Filename
+Rscript rNA.R -m src/rNA.Rmd \
+              -r data/TCGA-GBM_Raw_RSEM_Genes.txt \
+              -t data/TCGA-GBM_TINs.txt \
+              -q data/multiqc_matrix.txt -o "$PWD" \
+              -f index.html
+
+# Option(s): Annotate Sample Names in Complex Heatmap
+Rscript rNA.R -m src/rNA.Rmd \
+              -r data/TCGA-GBM_Raw_RSEM_Genes.txt \
+              -t data/TCGA-GBM_TINs.txt \
+              -q data/multiqc_matrix.txt -o "$PWD" \
+              --annotate
 ```
 
 If you are recieving an error that `pandoc was not found`, you will need to set the following bash enviroment variable: `RSTUDIO_PANDO`. You can add the line below to your `~/.bash_profile` or your `~/.bashrc` so it will be set as soon as you open a new shell.
