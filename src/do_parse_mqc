@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# RSeQC Inner Distance Maxmia
+echo -e "Sample\tInner_Dist_Maxima" > mqc_rseqc_inner_distance_plot_Percentages_parsed.txt; for f in ../STAR_files/*.Aligned.sortedByCoord.out.inner_distance_freq.txt; do sample=$(basename $f | sed 's/^output.//' | sed 's/.p2.Aligned.sortedByCoord.out.inner_distance_freq.txt$//'); inner_dist_maxima=$(sort -k3,3nr "$f" | awk -F '\t' 'NR==1{print $1}'); echo -e "${sample}\t${inner_dist_maxima}"; done >> mqc_rseqc_inner_distance_plot_Percentages_parsed.txt
+
+# RSeQC median TIN
+echo -e "Sample\tmedian_tin" > rseqc_median_tin.txt; cut -f1,3 ../STAR_files/*.summary.txt | grep -v '^Bam_file' | sed 's/.p2.Aligned.sortedByCoord.out.dmark.bam//g' | awk -F '\t' '{printf "%s\t%.3f\n", $1,$2}' >> rseqc_median_tin.txt
+
+# Flowcell and Lane information
+cp ../rpt.on.fastqs.txt .
+echo -e "Sample\tflowcell_lanes" > sample_flowcell_lanes.txt; sed 's/\.R1\.fastq\.gz//g' rpt.on.fastqs.txt | awk -v OFS='\t' '{print $1,$NF}' >> sample_flowcell_lanes.txt
+
+# MultiQC table
+python pyparser.py *.txt
+
+# Generate TIN counts matrix
+python create_tin_matrix.py ../STAR_files/*.tin.xls
+
+# Get Counts Matrix 
+cp ../DEG_ALL/RSEM.genes.expected_count.all_samples.txt RSEM_genes_expected_counts.tsv
+paste <(awk -F '\t' -v OFS='\t' '{print $1"|"$2}' RSEM_genes_expected_counts.tsv | sed '1 s/gene_id|GeneName/symbol/') <(cut -f3- RSEM_genes_expected_counts.tsv) > RSEM_genes_expected_counts.tmp
+# Fix formatting and remove suffix from sample names
+(head -1 RSEM_genes_expected_counts.tmp | tr '\t' '\n' | sed 's/_expected_count$//g' | tr '\n' '\t' | sed 's/.$/\n/'; tail -n+2  RSEM_genes_expected_counts.tmp) > RSEM_genes_expected_counts.tmp2
+
+mv RSEM_genes_expected_counts.tmp2 RSEM_genes_expected_counts.tsv 
+rm RSEM_genes_expected_counts.tmp
