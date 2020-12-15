@@ -1,5 +1,5 @@
 ---
-title: "rNA: report Not Applicable"
+title: "report Not Applicable"
 author: "Assess the quality of large RNA-seq cohorts"
 params:
   raw: "/path/to/raw/counts/matrix.tsv"
@@ -98,15 +98,6 @@ Inputs {.sidebar}
 
 ```{r filters}
 
-# # Sample ID
-# filter_select(
-#   id = "Sample",
-#   label = "Sample ID",
-#   sharedData = shared_metadata,
-#   group = ~Sample
-# )
-
-
 # Extracted Tissue
 filter_checkbox(
   id = "TissueType",
@@ -134,28 +125,18 @@ filter_select(
 )
 
 
-# # Total Reads
-# filter_slider(
-#   id = "total_read_pairs",
-#   label = "Total Reads",
-#   sharedData = shared_metadata,
-#   column = ~total_read_pairs,
-#   step = 1000000,
-#   round = TRUE,
-#   sep = "",
-#   ticks = FALSE
-# )
-
 # Median TIN
 filter_slider(
   id = "median_tin",
   label = "medTIN",
   sharedData = shared_metadata,
   column = ~median_tin,
-  step = 2,
+  step = 5,
   round = TRUE,
   sep = "",
-  ticks = FALSE
+  ticks = TRUE,
+  min = 0,
+  max = 100
 )
 
 
@@ -165,34 +146,11 @@ filter_slider(
   label = "Trimmed Reads",
   sharedData = shared_metadata,
   column = ~trimmed_read_pairs,
-  step = 1000000,
+  step = 5000000,
   round = TRUE,
   sep = "",
-  ticks = FALSE
-)
-
-
-# # Average Sequence Length
-# filter_slider(
-#   id = "avg_sequence_length",
-#   label = "Average Sequence Length",
-#   sharedData = shared_metadata,
-#   column = ~avg_sequence_length,
-#   step = 5,
-#   sep = "",
-#   ticks = FALSE
-# )
-
-
-
-# GC content
-filter_slider(
-  id = "gc_content",
-  label = "GC content",
-  sharedData = shared_metadata,
-  column = ~gc_content,
-  sep = "",
-  ticks = FALSE
+  ticks = TRUE,
+  min = 0
 )
 
 
@@ -203,8 +161,11 @@ filter_slider(
   sharedData = shared_metadata,
   column = ~percent_duplication,
   step = 5,
+  round = TRUE,
   sep = "",
-  ticks = FALSE
+  ticks = TRUE,
+  min = 0,
+  max = 100
 )
 
 
@@ -215,9 +176,13 @@ filter_slider(
   sharedData = shared_metadata,
   column = ~percent_aligned,
   step = 5,
+  round = TRUE,
   sep = "",
-  ticks = FALSE
+  ticks = TRUE,
+  min = 0,
+  max = 100
 )
+
 
 # % Coding
 filter_slider(
@@ -226,8 +191,11 @@ filter_slider(
   sharedData = shared_metadata,
   column = ~pct_coding_bases,
   step = 5,
+  round = TRUE,
   sep = "",
-  ticks = FALSE
+  ticks = TRUE,
+  min = 0,
+  max = 100
 )
 
 
@@ -239,7 +207,9 @@ filter_slider(
   column = ~pct_intronic_bases,
   step = 5,
   sep = "",
-  ticks = FALSE
+  ticks = TRUE,
+  min = 0,
+  max = 100
 )
 
 
@@ -249,20 +219,24 @@ filter_slider(
   label = "% rRNA",
   sharedData = shared_metadata,
   column = ~rRNA_percent_aligned,
+  step = 5,
   sep = "",
-  ticks = FALSE
+  round = TRUE,
+  ticks = TRUE,
+  min = 0,
+  max = 100
 )
 
 
-# # % UniVec
-# filter_slider(
-#   id = "uni_vec_percent_aligned",
-#   label = "% UniVec",
-#   sharedData = shared_metadata,
-#   column = ~uni_vec_percent_aligned,
-#   sep = "",
-#   ticks = FALSE
-# )
+# GC content
+filter_slider(
+  id = "gc_content",
+  label = "GC content",
+  sharedData = shared_metadata,
+  column = ~gc_content,
+  sep = "",
+  ticks = TRUE
+)
 
 
 # CV Coverage
@@ -272,7 +246,7 @@ filter_slider(
   sharedData = shared_metadata,
   column = ~median_cv_coverage,
   sep = "",
-  ticks = FALSE
+  ticks = TRUE
 )
 
 
@@ -284,7 +258,8 @@ filter_slider(
   column = ~inner_distance_maxima,
   step = 10,
   sep = "",
-  ticks = FALSE
+  ticks = TRUE,
+  round = TRUE
 )
 
 # Insert Size
@@ -295,7 +270,7 @@ filter_slider(
   column = ~median_insert_size,
   step = 5,
   sep = "",
-  ticks = FALSE
+  ticks = TRUE
 )
 
 ```
@@ -664,7 +639,7 @@ if (params$annot){
                     bottom_annotation = column_annotations,
                     show_column_names=F,
                     show_heatmap_legend = F) # Turning off to control the placement
-} 
+}
 
 draw(cheatmap, show_annotation_legend = FALSE)
 ```
@@ -749,6 +724,6 @@ Column {data-width=400}
 
 ### Session Information
 
-```{r}
+```{r session-info}
 sessionInfo()
 ```
