@@ -4,7 +4,9 @@
 
 <img src="https://github.com/skchronicles/rNA/blob/master/data/rNA-demo.png">
 
-View a [demo of an interactive rNA report](http://ccbr.github.io/rNA/rNA.html) with The Cancer Genome Atlas Glioblastoma Multiforme (TCGA-GBM) RNA-seq data.  
+View a demo of an interactive rNA report with a The Cancer Genome Atlas (TCGA) RNA-seq dataset:
+- [Glioblastoma Multiforme (TCGA-GBM)](http://ccbr.github.io/rNA/rNA.html)
+- [Low Grade Glioma (TCGA-LGG)](http://ccbr.github.io/rNA/RNA_Report_TCGA_LGG.html)
 
 ### Table of Contents
 1. [Introduction](#1-Introduction)  
