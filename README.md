@@ -67,24 +67,26 @@ $ ./rNA.R [OPTIONS] -m RMARKDOWN -r RAW_COUNTS -t TIN_COUNTS -q QC_TABLE -o OUTP
 
 ##### 3.4 Examples
 ```bash
+# Run rNA with the provided TCGA GBM test dataset
+
 # Basic Usage
 Rscript rNA.R -m src/rNA.Rmd \
-              -r data/TCGA-GBM_Raw_RSEM_Genes.txt \
-              -t data/TCGA-GBM_TINs.txt \
-              -q data/multiqc_matrix.txt -o "$PWD"
+              -r data/RSEM_genes_expected_counts.tsv \
+              -t data/combined_TIN.tsv \
+              -q data/multiqc_matrix.tsv -o "$PWD"
 
 # Option(s): Custom Output Filename
 Rscript rNA.R -m src/rNA.Rmd \
-              -r data/TCGA-GBM_Raw_RSEM_Genes.txt \
-              -t data/TCGA-GBM_TINs.txt \
-              -q data/multiqc_matrix.txt -o "$PWD" \
+              -r data/RSEM_genes_expected_counts.tsv \
+              -t data/combined_TIN.tsv \
+              -q data/multiqc_matrix.tsv -o "$PWD" \
               -f index.html
 
 # Option(s): Annotate Sample Names in Complex Heatmap
 Rscript rNA.R -m src/rNA.Rmd \
-              -r data/TCGA-GBM_Raw_RSEM_Genes.txt \
-              -t data/TCGA-GBM_TINs.txt \
-              -q data/multiqc_matrix.txt -o "$PWD" \
+              -r data/RSEM_genes_expected_counts.tsv \
+              -t data/combined_TIN.tsv \
+              -q data/multiqc_matrix.tsv -o "$PWD" \
               --annotate
 ```
 
