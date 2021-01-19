@@ -41,12 +41,16 @@ args <- parser$parse_args()
 # Get current working directory to setwd() of rmarkdown, else PATHs must be absolute
 working_directory = getwd()  # allows for relative paths to this main entry script 
 
+# Create output directory if it does not exist
+dir.create(args$output_dir, recursive = TRUE, showWarnings = FALSE)
+
 # Generate HTML output
 rmarkdown::render(args$rmarkdown, output_file=file.path(args$output_dir, args$output_filename), params = list(
   raw = args$raw_counts,
   tin = args$tin_counts,
   qc = args$qc_table,
   wdir = working_directory,
+  odir = args$output_dir,
   annot = args$annotate  
  )
 )
