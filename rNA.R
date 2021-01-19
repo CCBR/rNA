@@ -1,4 +1,4 @@
-#!/usr/bin/env R
+#!/usr/bin/env Rscript
 
 # USAGE: Rscript rNA.R -m src/rNA.Rmd -r data/TCGA-GBM_Raw_RSEM_Genes.txt -t data/TCGA-GBM_TINs.txt -q data/multiqc_matrix.txt -o "$PWD"
 
