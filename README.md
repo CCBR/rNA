@@ -18,7 +18,7 @@ View a demo of an interactive rNA report with a The Cancer Genome Atlas (TCGA) R
     3.2 [Required Arguments](#32-Required-Arguments)  
     3.3 [OPTIONS](#33-OPTIONS)  
     3.4 [Example](#34-Example)  
-4. [Filtering Critea](#4-Filtering-Critea)
+4. [Filtering Criteria](#4-Filtering-Criteria)
 5. [References](#5-References)
 
 
@@ -38,7 +38,7 @@ The quality of each sample is independently assessed using FastQC<sup>2</sup>, P
 
 ##### 2.2 Downstream Analysis 
 
-rNA takes the raw counts matrix, TIN counts matrix, and the QC metadata table generated in the pipeline described above as input. These are a few of the **required** command-line arguments to `rNA.R`. rNA performs the following steps listed below. The expected counts from RSEM are filtered to remove lowly expressed genes with edgeR's<sup>18</sup> `filterByExpr()` function using the following critea: genes must have 10 reads in >= 70% samples. The normalisation factors calculated using edgeR's TMM method  are used as scaling factors for library size. Using the `voom()` function in limma<sup>8</sup>, the counts are converted log2-counts-per-million (logCPM) and quantile normalized.
+rNA takes the raw counts matrix, TIN counts matrix, and the QC metadata table generated in the pipeline described above as input. These are a few of the **required** command-line arguments to `rNA.R`. rNA performs the following steps listed below. The expected counts from RSEM are filtered to remove lowly expressed genes with edgeR's<sup>18</sup> `filterByExpr()` function using the following criteria: genes must have 10 reads in >= 70% samples. The normalisation factors calculated using edgeR's TMM method  are used as scaling factors for library size. Using the `voom()` function in limma<sup>8</sup>, the counts are converted log2-counts-per-million (logCPM) and quantile normalized.
 
 _voom_<sup>7</sup> is an acronym for mean-variance modelling at the observational level. The key concern is to estimate the mean-variance relationship in the data, then use this to compute appropriate weights for each observation. Count data almost show non-trivial mean-variance relationships. Raw counts show increasing variance with increasing count size, while log-counts typically show a decreasing mean-variance trend. This function estimates the mean-variance trend for log-counts, then assigns a weight to each observation based on its predicted variance. The weights are then used in the linear modelling process to adjust for heteroscedasticity.
 
@@ -71,25 +71,43 @@ $ ./rNA.R [OPTIONS] -m RMARKDOWN -r RAW_COUNTS -t TIN_COUNTS -q QC_TABLE -o OUTP
 ```bash
 # Run rNA with the provided TCGA GBM test dataset
 
-# Basic Usage
+# 1. Basic Usage (assumes dependencies installed)
 Rscript rNA.R -m src/rNA.Rmd \
               -r data/RSEM_genes_expected_counts.tsv \
               -t data/combined_TIN.tsv \
               -q data/multiqc_matrix.tsv -o "$PWD"
 
-# Option(s): Custom Output Filename
+# 1A. Option(s): Custom Output Filename
 Rscript rNA.R -m src/rNA.Rmd \
               -r data/RSEM_genes_expected_counts.tsv \
               -t data/combined_TIN.tsv \
               -q data/multiqc_matrix.tsv -o "$PWD" \
               -f index.html
 
-# Option(s): Annotate Sample Names in Complex Heatmap
+# 1B. Option(s): Annotate Sample Names in Complex Heatmap
 Rscript rNA.R -m src/rNA.Rmd \
               -r data/RSEM_genes_expected_counts.tsv \
               -t data/combined_TIN.tsv \
               -q data/multiqc_matrix.tsv -o "$PWD" \
               --annotate
+
+# 2. Basic Usage with Docker
+# Assumes docker in $PATH
+docker run -v $PWD:/data2 nciccbr/ccbr_rna:latest rNA.R \
+             -m /opt2/rNA/src/rNA.Rmd \
+             -r /opt2/rNA/data/RSEM_genes_expected_counts.tsv \
+             -t /opt2/rNA/data/combined_TIN.tsv \
+             -q /opt2/rNA/data/multiqc_matrix.tsv \
+             -o /data2/
+
+# 3. Basic Usage with Singularity
+# Assumes singularity in $PATH
+SINGULARITY_CACHEDIR=$PWD singularity exec -B $PWD:/data2 docker://nciccbr/ccbr_rna rNA.R \
+             -m /opt2/rNA/src/rNA.Rmd \
+             -r /opt2/rNA/data/RSEM_genes_expected_counts.tsv \
+             -t /opt2/rNA/data/combined_TIN.tsv \
+             -q /opt2/rNA/data/multiqc_matrix.tsv \
+             -o /data2/
 ```
 
 If you are recieving an error that `pandoc was not found`, you will need to set the following bash enviroment variable: `RSTUDIO_PANDO`. You can add the line below to your `~/.bash_profile` or your `~/.bashrc` so it will be set as soon as you open a new shell.
@@ -99,7 +117,7 @@ echo 'export RSTUDIO_PANDOC=/Applications/RStudio.app/Contents/MacOS/pandoc' >> 
 source ~/.bash_profile
 ```
 
-### 4. Filtering Critea
+### 4. Filtering Criteria
 
 **General Recommendations** 
 
