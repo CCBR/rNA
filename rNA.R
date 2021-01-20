@@ -45,7 +45,7 @@ working_directory = getwd()  # allows for relative paths to this main entry scri
 dir.create(args$output_dir, recursive = TRUE, showWarnings = FALSE)
 
 # Generate HTML output
-rmarkdown::render(args$rmarkdown, output_file=file.path(args$output_dir, args$output_filename), params = list(
+rmarkdown::render(args$rmarkdown, intermediates_dir = tempdir(), output_file=file.path(args$output_dir, args$output_filename), params = list(
   raw = args$raw_counts,
   tin = args$tin_counts,
   qc = args$qc_table,
