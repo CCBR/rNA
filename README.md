@@ -1,6 +1,6 @@
 # rNA
 
-[![GitHub issues](https://img.shields.io/github/issues/CCBR/rNA)](https://github.com/CCBR/rNA/issues)  [![GitHub license](https://img.shields.io/github/license/CCBR/rNA)](https://github.com/CCBR/rNA/blob/master/LICENSE)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/CCBR/rNA) [![GitHub issues](https://img.shields.io/github/issues/CCBR/rNA)](https://github.com/CCBR/rNA/issues)  [![GitHub license](https://img.shields.io/github/license/CCBR/rNA)](https://github.com/CCBR/rNA/blob/master/LICENSE)
 
 <img src="https://github.com/skchronicles/rNA/blob/master/data/rNA-demo.png">
 
